@@ -23,7 +23,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-    
+
     def perform_update(self, serializer):
         serializer.save(last_update_time=datetime.now())
 
@@ -42,7 +42,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         post = get_object_or_404(Post, pk=self.kwargs.get('post_id'))
         return post.comments.all()
-    
+
     def perform_update(self, serializer):
         serializer.save(last_update_time=datetime.now())
 
