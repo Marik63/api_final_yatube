@@ -1,12 +1,11 @@
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-
 from rest_framework import filters, permissions, status, viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.pagination import LimitOffsetPagination
-from datetime import datetime
 
+from datetime import datetime
 from posts.models import Group, Post, User
 from .permission import IsOwnerOrReadOnly
 from .serializers import (
@@ -23,7 +22,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-
+    
     def perform_update(self, serializer):
         serializer.save(last_update_time=datetime.now())
 
@@ -42,12 +41,6 @@ class CommentViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         post = get_object_or_404(Post, pk=self.kwargs.get('post_id'))
         return post.comments.all()
-
-    def perform_update(self, serializer):
-        serializer.save(last_update_time=datetime.now())
-
-    def perform_destroy(self, instance):
-        instance.delete()
 
 
 class GroupViewSet(viewsets.ModelViewSet):
