@@ -40,3 +40,5 @@ python manage.py runserver
 /api/v1/posts/ (GET, POST, PUT, PATCH, DELETE)
 
 При отправке запроса передавайте токен в заголовке Authorization: Bearer <токен>
+
+Полная документация (redoc.yaml) доступна по адресу http://localhost:8000/redoc/
