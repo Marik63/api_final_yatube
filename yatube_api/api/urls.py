@@ -13,7 +13,7 @@ router.register(r'posts/(?P<post_id>\d+)/comments', CommentViewSet,
 router.register('groups', GroupViewSet, basename='groups')
 
 urlpatterns = [
-    path('api/v1/', include(router.urls)),
+    path('v1/', include(router.urls)),
     path('api/v1/', include('djoser.urls')),
     path('api/v1/', include('djoser.urls.jwt')),
     path('api/v1/token/', TokenObtainPairView.as_view(),
