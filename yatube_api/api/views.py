@@ -46,8 +46,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.request.user.username)
-        return user.follower
+        return self.request.user.follower.all()
 
 
 class FollowViewSet(viewsets.ModelViewSet):
